@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/0.5.0/aframe.min.js"></script>
+	<script src="static/scripts/libs/aframe/aframe-orbit-controls-component.min.js"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/player.css">
+    <!-- <link href="static/css/rollerblade.css" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="static/css/turntable.css"/> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="static/css/custom.css"/>
+</head>
+
+<body>
+
+    <div class="hc-gallery">
+        <!-- <div id="target">
+          <img class="rollerblade-img" src="static/assets/images/dia-body/Dia-Hat-1.png">
+        </div> -->
+        <div id="dia-turntable" class="turntable">
+          <ul>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-23.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-22.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-21.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-20.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-19.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-18.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-17.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-16.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-15.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-14.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-13.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-12.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-11.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-10.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-9.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-8.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-7.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-6.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-5.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-4.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-3.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-2.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-1.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-23.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-22.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-21.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-20.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-19.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-18.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-17.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-16.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-15.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-14.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-13.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-12.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-11.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-10.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-9.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-8.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-7.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-6.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-5.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-4.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-3.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-2.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-1.png"></li>
+            <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-23.png"></li>
+          </ul>
+        </div>
+
+        <!-- Controls -->
+        <div id="title">
+            <span id="track"></span>
+        </div>
+        <div id="toolbar">
+            <div id="audio-bar">
+                <div class="controlsOuter">
+                    <!-- <div class="controlsInner"> -->
+                        <div id="loading"></div>
+
+                        <div id="play-pause">
+                            <div class="btn" id="playBtn"></div>
+                            <div class="btn" id="pauseBtn"></div>
+                        </div>
+
+                        <div id="scrubber">
+                            <div id="bar"></div>
+                            <div id="progress"></div>
+                        </div>
+
+                        <div class="btn" id="prevBtn"></div>
+                        <div class="btn" id="nextBtn"></div>
+                    <!-- </div> -->
+                    <!-- <div class="btn" id="volumeBtn"></div> -->
+                    <!-- <div id="timer">0:00</div>
+                    <div id="divider">/</div>
+                    <div id="duration">0:00</div> -->
+                    <!-- <div class="btn" id="playlistBtn"></div> -->
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Progress -->
+        <div id="waveform"></div>
+        <!-- <div id="bar"></div> -->
+
+        <!-- Playlist -->
+        <div id="playlist">
+            <div id="list">
+                <!-- <div class="list-song">
+                    <div class="list-thumb">
+                        <div class="list-head">
+                            This is a test this is a test This is a test this is a test This is a test this is a test This is a test this is a test
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+
+        <!-- Volume -->
+        <div id="volume" class="fadeout">
+            <div id="barFull" class="bar"></div>
+            <div id="barEmpty" class="bar"></div>
+            <div id="sliderBtn"></div>
+        </div>
+
+    </div>
+    <div class="hc-gallery">
+        <!-- <div id="target">
+          <img class="rollerblade-img" src="static/assets/images/dia-body/Dia-Hat-1.png">
+        </div> -->
+        <div id="dia2-turntable" class="turntable">
+          <ul>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-23.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-22.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-21.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-20.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-19.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-18.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-17.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-16.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-15.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-14.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-13.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-12.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-11.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-10.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-9.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-8.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-7.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-6.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-5.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-4.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-3.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-2.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-1.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-23.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-22.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-21.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-20.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-19.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-18.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-17.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-16.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-15.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-14.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-13.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-12.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-11.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-10.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-9.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-8.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-7.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-6.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-5.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-4.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-3.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-2.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-1.png"></li>
+              <li data-img-src="static/assets/images/dia-hat-1000/dia-hat-1000-23.png"></li>
+          </ul>
+        </div>
+
+        <!-- Controls -->
+        <div id="title">
+            <span id="track"></span>
+        </div>
+        <div id="toolbar">
+            <div id="audio-bar">
+                <div class="controlsOuter">
+                    <!-- <div class="controlsInner"> -->
+                        <div id="loading"></div>
+
+                        <div id="play-pause">
+                            <div class="btn" id="playBtn"></div>
+                            <div class="btn" id="pauseBtn"></div>
+                        </div>
+
+                        <div id="scrubber">
+                            <div id="bar"></div>
+                            <div id="progress"></div>
+                        </div>
+
+                        <div class="btn" id="prevBtn"></div>
+                        <div class="btn" id="nextBtn"></div>
+                    <!-- </div> -->
+                    <div class="btn" id="volumeBtn"></div>
+                    <div id="timer">0:00</div>
+                    <div id="divider">/</div>
+                    <div id="duration">0:00</div>
+                    <div class="btn" id="playlistBtn"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Progress -->
+        <div id="waveform"></div>
+        <!-- <div id="bar"></div> -->
+
+        <!-- Playlist -->
+        <div id="playlist">
+            <div id="list">
+                <!-- <div class="list-song">
+                    <div class="list-thumb">
+                        <div class="list-head">
+                            This is a test this is a test This is a test this is a test This is a test this is a test This is a test this is a test
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+
+        <!-- Volume -->
+        <div id="volume" class="fadeout">
+            <div id="barFull" class="bar"></div>
+            <div id="barEmpty" class="bar"></div>
+            <div id="sliderBtn"></div>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="static/scripts/src/howler.core.js"></script>
+    <script src="static/scripts/siriwave.js"></script>
+    <script src="static/scripts/player.js"></script>
+    <script src="static/scripts/libs/turntable/turntable.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.3/howler.min.js"></script>
+	<script src="static/scripts/base.js"></script>
+
+
+</body>
+
+</html>
