@@ -1,9 +1,9 @@
 body {
   background: rgba(0, 0, 0, 0.05); }
 
-.hc-gallery {
-  width: 50%;
-  max-width: 1800px;
+.hc-card, .hc-card1 {
+  width: 90%;
+  max-width: 1000px;
   margin: 2rem auto;
   display: block;
   position: relative;
@@ -13,7 +13,7 @@ body {
   height: auto;
   background: white; }
   @media (max-width: 1000px) {
-    .hc-gallery {
+    .hc-card, .hc-card1 {
       width: 90%; } }
 
 #nav {
