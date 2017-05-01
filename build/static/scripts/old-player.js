@@ -328,7 +328,7 @@ scrubber.addEventListener('click', function(event) {
 //   player.toggleVolume();
 // });
 
-// Setup the event listeners to enable dragging of volume slider.
+// // Setup the event listeners to enable dragging of volume slider.
 // barEmpty.addEventListener('click', function(event) {
 //   var per = event.layerX / parseFloat(barEmpty.scrollWidth);
 //   player.volume(per);
@@ -345,7 +345,7 @@ scrubber.addEventListener('click', function(event) {
 // volume.addEventListener('touchend', function() {
 //   window.sliderDown = false;
 // });
-
+//
 // var move = function(event) {
 //   if (window.sliderDown) {
 //     var x = event.clientX || event.touches[0].clientX;
@@ -355,7 +355,7 @@ scrubber.addEventListener('click', function(event) {
 //     player.volume(per);
 //   }
 // };
-
+//
 // volume.addEventListener('mousemove', move);
 // volume.addEventListener('touchmove', move);
 

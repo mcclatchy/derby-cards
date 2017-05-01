@@ -161,6 +161,27 @@ Player.prototype = {
    * Set the volume and update the volume slider display.
    * @param  {Number} val Volume between 0 and 1.
    */
+  volume: function(val) {
+    var self = this;
+
+    // Update the global volume (affecting all Howls).
+    Howler.volume(val);
+
+    // Update the display on the slider.
+    var barWidth = (val * 90) / 100;
+    barFull.style.width = (barWidth * 100) + '%';
+    var test2 = (volume.clientWidth * barWidth + 25) + 'px';
+    sliderBtn.style.left = test2;
+
+    console.log('scrub = ', test2);
+
+    console.log('bar = ', (barWidth));
+  },
+
+  /**
+   * Set the volume and update the volume slider display.
+   * @param  {Number} val Volume between 0 and 1.
+   */
 
   /**
    * Seek to a new position in the currently playing track.
@@ -259,9 +280,63 @@ pauseBtn.addEventListener('click', function() {
 scrubber.addEventListener('click', function(event) {
   var scrubberOffset = $(this).offset();
   var mousePos = event.pageX - scrubberOffset.left;
-  console.log(mousePos);
   player.seek(mousePos / scrubber.clientWidth);
-
-  // player.seek(event.clientX / (scrubber.clientWidth));
-  // console.log(event.clientX, scrubber.clientWidth);
 });
+
+// Setup the event listeners to enable dragging of volume slider.
+barEmpty.addEventListener('click', function(event) {
+  var per = event.layerX / parseFloat(barEmpty.scrollWidth);
+  player.volume(per);
+});
+sliderBtn.addEventListener('mousedown', function() {
+  volume.sliderDown = true;
+});
+sliderBtn.addEventListener('touchstart', function() {
+  volume.sliderDown = true;
+});
+volume.addEventListener('mouseup', function() {
+  volume.sliderDown = false;
+});
+volume.addEventListener('touchend', function() {
+  volume.sliderDown = false;
+});
+
+var move = function(event) {
+  if (volume.sliderDown) {
+    var x = event.clientX || event.touches[0].clientX;
+    var startX = volume.clientWidth - (volume.clientWidth * 0.17);
+    console.log('btn = ', startX);
+    var layerX = x - startX;
+    var per = Math.min(1, Math.max(0, layerX / parseFloat(barEmpty.scrollWidth)));
+    player.volume(per);
+  }
+};
+
+volume.addEventListener('mousemove', move);
+volume.addEventListener('touchmove', move);
+
+// Update the height of the wave animation.
+// These are basically some hacks to get SiriWave.js to do what we want.
+var resize = function() {
+  var height = window.innerHeight * 0.3;
+  var width = window.innerWidth;
+  wave.height = height;
+  wave.height_2 = height / 2;
+  wave.MAX = wave.height_2 - 4;
+  wave.width = width;
+  wave.width_2 = width / 2;
+  wave.width_4 = width / 4;
+  wave.canvas.height = height;
+  wave.canvas.width = width;
+  wave.container.style.margin = -(height / 2) + 'px auto';
+
+  // Update the position of the slider.
+  var sound = player.playlist[player.index].howl;
+  if (sound) {
+    var vol = sound.volume();
+    var barWidth = (vol * 0.9);
+    sliderBtn.style.left = (window.innerWidth * barWidth + window.innerWidth * 0.05 - 25) + 'px';
+  }
+};
+window.addEventListener('resize', resize);
+resize();
