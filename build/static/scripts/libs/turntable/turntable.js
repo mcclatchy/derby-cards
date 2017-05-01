@@ -121,7 +121,7 @@
         }
         // loop through array and find correct range pair
         applyClasses(sections, position);
-      });   
+      });
 
     } else {
       // mouseover
@@ -134,7 +134,7 @@
           position = e.pageX - offset.left;
         }
         applyClasses(sections, position);
-      });  
+      });
 
     }
   }; //end if

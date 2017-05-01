@@ -257,5 +257,11 @@ pauseBtn.addEventListener('click', function() {
 });
 
 scrubber.addEventListener('click', function(event) {
-  player.seek(event.clientX / (scrubber.clientWidth));
+  var scrubberOffset = $(this).offset();
+  var mousePos = event.pageX - scrubberOffset.left;
+  console.log(mousePos);
+  player.seek(mousePos / scrubber.clientWidth);
+
+  // player.seek(event.clientX / (scrubber.clientWidth));
+  // console.log(event.clientX, scrubber.clientWidth);
 });

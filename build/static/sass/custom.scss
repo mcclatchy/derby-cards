@@ -26,8 +26,9 @@ body {
 	height: auto;
 	background: white;
 
-	@media (max-width: 1000px) {
-		width: 90%;
+	@media (max-width: 1500px) {
+		// width: 80%;
+		max-width: 900px;
 	}
 }
 

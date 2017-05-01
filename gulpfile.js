@@ -11,6 +11,8 @@ var imagemin = require('gulp-imagemin');
 var cache = require('gulp-cache');
 var del = require('del');
 var runSequence = require('run-sequence');
+var imageResize = require('gulp-image-resize');
+var rename = require("gulp-rename");
 
 /*******************************************************************************
 DEVELOPMENT TASKS
@@ -18,9 +20,20 @@ DEVELOPMENT TASKS
 
 // runs all development tasks in order listed with the 'gulp' command (default)
 gulp.task('default', function(callback) {
-    runSequence(['sass', 'browserSync', 'watch'],
+    runSequence(['image-resize', 'sass', 'browserSync', 'watch'],
         callback
     );
+});
+
+gulp.task('image-resize', function() {
+    return gulp.src('build/static/assets/images/**/*.+(png|jpg|jpeg|gif|svg)')
+        .pipe(imageResize({
+            width: 600
+        }))
+        .pipe(rename(function(path) {
+            path.basename += "-600";
+        }))
+        .pipe(gulp.dest('build/static/assets/images/resize-test'));
 });
 
 // reloads browser on file save
@@ -58,7 +71,7 @@ PRODUCTION TASKS
 // sequences build task to run after production tasks
 gulp.task('prod', function(callback) {
     // runs each task in order listed
-    runSequence('clean:prod', ['sass', 'useref',  'images', 'fonts'],
+    runSequence('clean:prod', ['sass', 'useref', 'images', 'fonts'],
         callback
     );
 });
