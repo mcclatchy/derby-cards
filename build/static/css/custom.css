@@ -96,7 +96,7 @@ AUDIO PLAYER
   font-size: 2rem !important;
   color: #094d73; }
 
-#playBtn {
+.playBtn {
   position: relative;
   width: 34px;
   height: 35px;
@@ -105,7 +105,7 @@ AUDIO PLAYER
   background-size: contain;
   margin: -17.5px auto; }
 
-#pauseBtn {
+.pauseBtn {
   position: relative;
   width: 34px;
   height: 35px;
@@ -128,11 +128,11 @@ AUDIO PLAYER
   color: #094d73;
   text-align: right; }
 
-#timer, #divider, #duration {
+.timer, #divider, .duration {
   display: inline-block; }
 
 /* Progress */
-#scrubber {
+.scrubber {
   position: relative;
   height: 5px;
   float: left;
@@ -143,7 +143,7 @@ AUDIO PLAYER
   cursor: pointer;
   background: rgba(0, 0, 0, 0.2); }
 
-#progress {
+.progress {
   position: relative;
   top: 0;
   left: 0;

@@ -8,333 +8,286 @@
  *  MIT License
  */
 
-// Cache references to DOM elements.
-var elms = ['track', 'timer', 'duration', 'playBtn', 'pauseBtn', 'prevBtn', 'nextBtn', 'playlistBtn', 'volumeBtn', 'progress', 'bar', 'wave', 'loading', 'scrubber', 'playlist', 'list', 'volume', 'barEmpty', 'barFull', 'sliderBtn'];
-elms.forEach(function(elm) {
-  window[elm] = document.getElementById(elm);
-});
+ $('.hc-card').each(function(i){
+   // Cache references to DOM elements.
+   var playBtn = $(this).find('.playBtn');
+   var track = $(this).find('.track');
+   var timer = $(this).find('.timer');
+   var pauseBtn = $(this).find('.pauseBtn');
+   var progress = $(this).find('.progress');
+   var bar = $(this).find('.bar');
+   var scrubber = $(this).find('.scrubber');
+   var duration = $(this).find('.duration');
 
-/**
- * Player class containing the state of our playlist and where we are in it.
- * Includes all methods for playing, skipping, updating the display, etc.
- * @param {Array} playlist Array of objects with playlist song details ({title, audio, howl}).
- */
-var Player = function(playlist) {
-  this.playlist = playlist;
-  this.index = 0;
+   /**
+    * Player class containing the state of our playlist and where we are in it.
+    * Includes all methods for playing, skipping, updating the display, etc.
+    * @param {Array} playlist Array of objects with playlist song details ({title, audio, howl}).
+    */
+   var Player = function(playlist) {
+     this.playlist = playlist;
+     this.index = i;
 
-  // Display the title of the first track.
-  track.innerHTML = playlist[0].title;
-};
-Player.prototype = {
-  /**
-   * Play a song in the playlist.
-   * @param  {Number} index Index of the song in the playlist (leave empty to play the first or current).
-   */
-  play: function(index) {
-    var self = this;
-    var sound;
+     // Display the title of the first track.
+   //   $(track).html(playlist[i].title);
+   };
+   Player.prototype = {
+     /**
+      * Play a song in the playlist.
+      * @param  {Number} index Index of the song in the playlist (leave empty to play the first or current).
+      */
+     play: function(index) {
+       var self = this;
+       var sound;
 
-    index = typeof index === 'number' ? index : self.index;
-    var data = self.playlist[index];
+       index = typeof index === 'number' ? index : self.index;
+       var data = self.playlist[index];
+       console.log(data);
 
-    // If we already loaded this track, use the current one.
-    // Otherwise, setup and load a new Howl.
-    if (data.howl) {
-      sound = data.howl;
-    } else {
-      sound = data.howl = new Howl({
-        src: ['static/assets/audio/' + data.audio + '.webm', 'static/assets/audio/' + data.audio + '.mp3'],
-        html5: true, // Force to HTML5 so that the audio can stream in (best for large audios).
-        onplay: function() {
-          // Display the duration.
-          duration.innerHTML = self.formatTime(Math.round(sound.duration()));
+       // If we already loaded this track, use the current one.
+       // Otherwise, setup and load a new Howl.
+       if (data.howl) {
+         sound = data.howl;
+       } else {
+         sound = data.howl = new Howl({
+           src: ['static/assets/audio/' + data.audio + '.mp3'],
+           html5: true, // Force to HTML5 so that the audio can stream in (best for large audios).
+           onplay: function() {
+             // Display the duration.
+             $(duration).html(self.formatTime(Math.round(sound.duration())));
 
-          // Start upating the progress of the track.
-          requestAnimationFrame(self.step.bind(self));
+             // Start upating the progress of the track.
+             requestAnimationFrame(self.step.bind(self));
 
-          // bar.style.display = 'none';
-          pauseBtn.style.display = 'block';
-        },
-        onload: function() {
-          // Start the scrubber animation.
-          bar.style.display = 'none';
-          loading.style.display = 'none';
-        },
-        onend: function() {
-          // Stop the scrubber animation.
-          bar.style.display = 'block';
-          self.skip('right');
-        },
-        onpause: function() {
-          // Stop the scrubber animation.
-          bar.style.display = 'block';
-        },
-        onstop: function() {
-          // Stop the scrubber animation.
-          bar.style.display = 'block';
-        }
-      });
-    }
+             // bar.style.display = 'none';
+             $(pauseBtn).show();
+           },
+           onload: function() {
+             // Start the scrubber animation.
+             $(bar).hide();
+           },
+           onend: function() {
+             // Stop the scrubber animation.
+             $(bar).show();
+             self.skip('right');
+           },
+           onpause: function() {
+             // Stop the scrubber animation.
+             $(bar).show();
+           },
+           onstop: function() {
+             // Stop the scrubber animation.
+             $(bar).show();
+           }
+         });
+       }
 
-    // Begin playing the sound.
-    sound.play();
+       // Begin playing the sound.
+       sound.play();
 
-    // Update the track display.
-    track.innerHTML =  data.title;
+       // Update the track display.
+       $(track).html(data.title);
+      //  track.innerHTML =  data.title;
 
-    // Show the pause button.
-    if (sound.state() === 'loaded') {
-      playBtn.style.display = 'none';
-      pauseBtn.style.display = 'block';
-    } else {
-      loading.style.display = 'block';
-      playBtn.style.display = 'none';
-      pauseBtn.style.display = 'none';
-    }
+       // Show the pause button.
+       if (sound.state() === 'loaded') {
+          $(playBtn).hide();
+          $(pauseBtn).show();
 
-    // Keep track of the index we are currently playing.
-    self.index = index;
-  },
+       } else {
+          $(playBtn).hide();
+          $(pauseBtn).hide();
+       }
 
-  /**
-   * Pause the currently playing track.
-   */
-  pause: function() {
-    var self = this;
+       // Keep track of the index we are currently playing.
+       self.index = index;
+     },
 
-    // Get the Howl we want to manipulate.
-    var sound = self.playlist[self.index].howl;
+     /**
+      * Pause the currently playing track.
+      */
+     pause: function() {
+       var self = this;
 
-    // Puase the sound.
-    sound.pause();
+       // Get the Howl we want to manipulate.
+       var sound = self.playlist[self.index].howl;
 
-    // Show the play button.
-    playBtn.style.display = 'block';
-    pauseBtn.style.display = 'none';
-  },
+       // Puase the sound.
+       sound.pause();
 
-  /**
-   * Skip to the next or previous track.
-   * @param  {String} direction 'next' or 'prev'.
-   */
-  skip: function(direction) {
-    var self = this;
+       // Show the play button.
+       $(playBtn).show();
+       $(pauseBtn).hide();
+     },
 
-    // Get the next track based on the direction of the track.
-    var index = 0;
-    if (direction === 'prev') {
-      index = self.index - 1;
-      if (index < 0) {
-        index = self.playlist.length - 1;
-      }
-    } else {
-      index = self.index + 1;
-      if (index >= self.playlist.length) {
-        index = 0;
-      }
-    }
+     /**
+      * Skip to the next or previous track.
+      * @param  {String} direction 'next' or 'prev'.
+      */
+     skip: function(direction) {
+       var self = this;
 
-    self.skipTo(index);
-  },
+       // Get the next track based on the direction of the track.
+       var index = 0;
+       if (direction === 'prev') {
+         index = self.index - 1;
+         if (index < 0) {
+           index = self.playlist.length - 1;
+         }
+       } else {
+         index = self.index + 1;
+         if (index >= self.playlist.length) {
+           index = 0;
+         }
+       }
 
-  /**
-   * Skip to a specific track based on its playlist index.
-   * @param  {Number} index Index in the playlist.
-   */
-  skipTo: function(index) {
-    var self = this;
+       self.skipTo(index);
+     },
 
-    // Stop the current track.
-    if (self.playlist[self.index].howl) {
-      self.playlist[self.index].howl.stop();
-    }
+     /**
+      * Skip to a specific track based on its playlist index.
+      * @param  {Number} index Index in the playlist.
+      */
+     skipTo: function(index) {
+       var self = this;
 
-    // Reset progress.
-    progress.style.width = '0%';
+       // Stop the current track.
+       if (self.playlist[self.index].howl) {
+         self.playlist[self.index].howl.stop();
+       }
 
-    // Play the new track.
-    self.play(index);
-  },
+       // Reset progress.
+       $(progress).css('width, 0%');
 
-  /**
-   * Set the volume and update the volume slider display.
-   * @param  {Number} val Volume between 0 and 1.
-   */
-  volume: function(val) {
-    var self = this;
+       // Play the new track.
+       self.play(index);
+     },
 
-    // Update the global volume (affecting all Howls).
-    Howler.volume(val);
+     /**
+      * Set the volume and update the volume slider display.
+      * @param  {Number} val Volume between 0 and 1.
+      */
+     volume: function(val) {
+       var self = this;
 
-    // Update the display on the slider.
-    var barWidth = (val * 90) / 100;
-    barFull.style.width = (barWidth * 100) + '%';
-    var test2 = (volume.clientWidth * barWidth + 25) + 'px';
-    sliderBtn.style.left = test2;
+       // Update the global volume (affecting all Howls).
+       Howler.volume(val);
 
-    console.log('scrub = ', test2);
+       // Update the display on the slider.
+       var barWidth = (val * 90) / 100;
+       barFull.style.width = (barWidth * 100) + '%';
+       var test2 = (volume.clientWidth * barWidth + 25) + 'px';
+       sliderBtn.style.left = test2;
+     },
 
-    console.log('bar = ', (barWidth));
-  },
+     /**
+      * Set the volume and update the volume slider display.
+      * @param  {Number} val Volume between 0 and 1.
+      */
 
-  /**
-   * Set the volume and update the volume slider display.
-   * @param  {Number} val Volume between 0 and 1.
-   */
+     /**
+      * Seek to a new position in the currently playing track.
+      * @param  {Number} per Percentage through the song to skip.
+      */
+     seek: function(per) {
+       var self = this;
 
-  /**
-   * Seek to a new position in the currently playing track.
-   * @param  {Number} per Percentage through the song to skip.
-   */
-  seek: function(per) {
-    var self = this;
+       // Get the Howl we want to manipulate.
+       var sound = self.playlist[self.index].howl;
 
-    // Get the Howl we want to manipulate.
-    var sound = self.playlist[self.index].howl;
+       // Convert the percent into a seek position.
+       if (sound.playing()) {
+         sound.seek(sound.duration() * per);
+       }
+     },
 
-    // Convert the percent into a seek position.
-    if (sound.playing()) {
-      sound.seek(sound.duration() * per);
-    }
-  },
+     /**
+      * The step called within requestAnimationFrame to update the playback position.
+      */
+     step: function() {
+       var self = this;
 
-  /**
-   * The step called within requestAnimationFrame to update the playback position.
-   */
-  step: function() {
-    var self = this;
+       // Get the Howl we want to manipulate.
+       var sound = self.playlist[self.index].howl;
 
-    // Get the Howl we want to manipulate.
-    var sound = self.playlist[self.index].howl;
+       // Determine our current seek position.
+       var seek = sound.seek() || 0;
+       $(timer).html(self.formatTime(Math.round(seek)));
+       var progressWidth = (((seek / sound.duration()) * 100) || 0) + '%';
+       $(progress).css({
+          width: progressWidth
+       });
 
-    // Determine our current seek position.
-    var seek = sound.seek() || 0;
-    timer.innerHTML = self.formatTime(Math.round(seek));
-    progress.style.width = (((seek / sound.duration()) * 100) || 0) + '%';
+       // console.log(progress.style.width);
 
-    // console.log(progress.style.width);
+       // If the sound is still playing, continue stepping.
+       if (sound.playing()) {
+         requestAnimationFrame(self.step.bind(self));
+       }
+     },
 
-    // If the sound is still playing, continue stepping.
-    if (sound.playing()) {
-      requestAnimationFrame(self.step.bind(self));
-    }
-  },
+     /**
+      * Toggle the playlist display on/off.
+      */
+     togglePlaylist: function() {
+       var self = this;
+       var display = (playlist.style.display === 'block') ? 'none' : 'block';
 
-  /**
-   * Toggle the playlist display on/off.
-   */
-  togglePlaylist: function() {
-    var self = this;
-    var display = (playlist.style.display === 'block') ? 'none' : 'block';
+       setTimeout(function() {
+         playlist.style.display = display;
+       }, (display === 'block') ? 0 : 500);
+       playlist.className = (display === 'block') ? 'fadein' : 'fadeout';
+     },
 
-    setTimeout(function() {
-      playlist.style.display = display;
-    }, (display === 'block') ? 0 : 500);
-    playlist.className = (display === 'block') ? 'fadein' : 'fadeout';
-  },
+     /**
+      * Format the time from seconds to M:SS.
+      * @param  {Number} secs Seconds to format.
+      * @return {String}      Formatted time.
+      */
+     formatTime: function(secs) {
+       var minutes = Math.floor(secs / 60) || 0;
+       var seconds = (secs - minutes * 60) || 0;
 
-  /**
-   * Format the time from seconds to M:SS.
-   * @param  {Number} secs Seconds to format.
-   * @return {String}      Formatted time.
-   */
-  formatTime: function(secs) {
-    var minutes = Math.floor(secs / 60) || 0;
-    var seconds = (secs - minutes * 60) || 0;
+       return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+     }
+   };
 
-    return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
-  }
-};
+   // Setup our new audio player class and pass it the playlist.
+   var player = new Player([
+     {
+         "audio": "dia",
+         "howl": null
+     },
+     {
+         "audio": "scott",
+         "howl": null
+     },
+     {
+         "audio": "nicole",
+         "howl": null
+     },
+     {
+         "audio": "clark",
+         "howl": null
+     },
+     {
+         "audio": "dianet",
+         "howl": null
+     }
+   ]);
 
-// Setup our new audio player class and pass it the playlist.
-var player = new Player([
-  {
-      "title": "Dia",
-      "obj": "static/assets/show-gallery/38.obj",
-      "mtl": "static/assets/show-gallery/38.mtl",
-      "texture": "static/assets/show-gallery/3801.jpg",
-      "audio": "80s_vibe",
-      "howl": null
-  },
-  {
-      "title": "Test",
-      "obj": "static/assets/show-gallery/38.obj",
-      "mtl": "static/assets/show-gallery/38.mtl",
-      "texture": "static/assets/show-gallery/3801.jpg",
-      "audio": "80s_vibe",
-      "howl": null
-  }
-]);
+   // Bind our player controls.
+   $(playBtn).click(function() {
+      player.play();
+   });
 
-// Bind our player controls.
-playBtn.addEventListener('click', function() {
-  player.play();
-});
-pauseBtn.addEventListener('click', function() {
-  player.pause();
-});
+   $(pauseBtn).click(function() {
+      player.pause();
+   });
 
-scrubber.addEventListener('click', function(event) {
-  var scrubberOffset = $(this).offset();
-  var mousePos = event.pageX - scrubberOffset.left;
-  player.seek(mousePos / scrubber.clientWidth);
-});
-
-// Setup the event listeners to enable dragging of volume slider.
-// barEmpty.addEventListener('click', function(event) {
-//   var per = event.layerX / parseFloat(barEmpty.scrollWidth);
-//   player.volume(per);
-// });
-// sliderBtn.addEventListener('mousedown', function() {
-//   volume.sliderDown = true;
-// });
-// sliderBtn.addEventListener('touchstart', function() {
-//   volume.sliderDown = true;
-// });
-// volume.addEventListener('mouseup', function() {
-//   volume.sliderDown = false;
-// });
-// volume.addEventListener('touchend', function() {
-//   volume.sliderDown = false;
-// });
-
-// var move = function(event) {
-//   if (volume.sliderDown) {
-//     var x = event.clientX || event.touches[0].clientX;
-//     var startX = volume.clientWidth - (volume.clientWidth * 0.17);
-//     console.log('btn = ', startX);
-//     var layerX = x - startX;
-//     var per = Math.min(1, Math.max(0, layerX / parseFloat(barEmpty.scrollWidth)));
-//     player.volume(per);
-//   }
-// };
-//
-// volume.addEventListener('mousemove', move);
-// volume.addEventListener('touchmove', move);
-
-// Update the height of the wave animation.
-// These are basically some hacks to get SiriWave.js to do what we want.
-// var resize = function() {
-//   var height = window.innerHeight * 0.3;
-//   var width = window.innerWidth;
-//   wave.height = height;
-//   wave.height_2 = height / 2;
-//   wave.MAX = wave.height_2 - 4;
-//   wave.width = width;
-//   wave.width_2 = width / 2;
-//   wave.width_4 = width / 4;
-//   wave.canvas.height = height;
-//   wave.canvas.width = width;
-//   wave.container.style.margin = -(height / 2) + 'px auto';
-//
-//   // Update the position of the slider.
-//   var sound = player.playlist[player.index].howl;
-//   if (sound) {
-//     var vol = sound.volume();
-//     var barWidth = (vol * 0.9);
-//     sliderBtn.style.left = (window.innerWidth * barWidth + window.innerWidth * 0.05 - 25) + 'px';
-//   }
-// // };
-// window.addEventListener('resize', resize);
-// resize();
+   $(scrubber).click(function (event) {
+      var scrubberOffset = $(scrubber).offset();
+      var mousePos = event.pageX - scrubberOffset.left;
+      player.seek(mousePos / $(scrubber).width());
+   });
+ });

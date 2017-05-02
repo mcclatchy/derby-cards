@@ -1,0 +1,49 @@
+[
+	id: 'Scott',
+	line: '1'
+	startTime: 0,
+	endTime: 6,
+	text: 'I said, 'I'm really interested in that straw boater up there.' And she said, 'Oh, those are wonderful!'
+]
+[
+	id: 'Scott',
+	line: '2'
+	startTime: 6,
+	endTime: 11,
+	text: 'They're made in Italy.' And I said, 'Really? I didn't know that!' She said, 'Yeah.' And while she's...she gets this...'
+]
+[
+	id: 'Scott',
+	line: '3'
+	startTime: 11,
+	endTime: 16,
+	text: '...really long pole, that was cane. I forgot to mention that. It was...'
+]
+[
+	id: 'Scott',
+	line: '4'
+	startTime: 16,
+	endTime: 21,
+	text: 'It wasn't even a metal pole. It was cane. And she just' reached up there and got it'
+]
+[
+	id: 'Scott',
+	line: '5'
+	startTime: 21,
+	endTime: 26,
+	text: 'and brought it back down, and she gets this now, 'Si! It's made in Italy!'
+]
+[
+	id: 'Scott',
+	line: '6'
+	startTime: 26,
+	endTime: 30,
+	text: 'It's from Venice! This is where the straw boater comes-...!''
+]
+[
+	id: 'Scott',
+	line: '7'
+	startTime: 30,
+	endTime: ,
+	text: 'And I then get about...at least a ten minute tutorial on the history of the straw boater.'
+]

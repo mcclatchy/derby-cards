@@ -1,0 +1,57 @@
+[
+	id: 'Clark',
+	line:'1',
+	startTime: 0,
+	endTime: 5,
+	text: 'This fabulous hat came from Fabulous Hats by Anne'
+],
+[
+	id: 'Clark'
+	line:'2'
+	startTime: 5,
+	endTime: 10,
+	text: 'She is a woman here in Lexington that makes hats, and when I was Miss Kentucky last year, 2015...'
+],
+[
+	id: 'Clark'
+	line: '3'
+	startTime: 10,
+	endTime: 15,
+	text: '...she made my hat for the Derby, so I figured who better than to make my hat for this year's Derby?'
+]
+[
+	id: 'Clark',
+	line: '4',
+	startTime: 15,
+	endTime: 22,
+	text: 'And I am SUPER excited! Pink and green are my favorite colors, and so I am looking forward to showing off my Fabulous Hat at the Kentucky Derby!'
+]
+[
+	id: 'Clark'
+	line: '5'
+	startTime: 23,
+	endTime: 29,
+	text: 'I...do not wear hats on the regular. I own one hat that I wear throughout the year.'
+]
+[
+	id: 'Clark',
+	line: '6'
+	startTime: 29,
+	endTime: 35,
+	text: 'So it's always exciting to get a hat that has feathers, and flowers, and beautiful colors all over the place'
+]
+[
+	id: 'Clark',
+	line: '7'
+	startTime: 35,
+	endTime: 42,
+	text: 'Which is something that I always look forward to. It's the one time of year in Kentucky that you really feel like you can...'
+
+]
+[
+	id: 'Clark',
+	line: '8'
+	startTime: 42,
+	endTime: 48,
+	text: '...dress up and go big or go home. So I love getting to wear my Kentucky Derby hats'
+]
