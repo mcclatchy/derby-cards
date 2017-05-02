@@ -9,9 +9,7 @@ Gets model playlist
 
 $(document).ready(function() {
     $('#dia-turntable').turntable();
-    $('#dia2-turntable').turntable();
-    $('#dia3-turntable').turntable();
-    $('#dia4-turntable').turntable();
+    $('#nicole-turntable').turntable();
 });
 
 /* Every time the window is scrolled ... */
@@ -24,22 +22,22 @@ $(window).scroll( function(){
         var bottom_of_window = $(window).scrollTop() + $(window).height() + 800;
 
         var turntableId = $(this).children(":first").attr('id');
+        console.log(turntableId);
 
         /* If the object is completely visible in the window, fade it in */
         if (bottom_of_window > bottom_of_object) {
             if ($('#' + turntableId + ' ul li.hc-end').length === 0) {
 
-                var test = "<li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-22.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-21.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-20.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-19.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-18.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-17.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-16.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-15.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-14.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-13.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-12.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-11.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-10.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-9.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-8.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-7.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-6.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-5.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-4.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-3.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-2.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-1.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-23.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-22.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-21.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-20.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-19.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-18.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-17.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-16.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-15.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-14.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-13.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-12.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-11.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-10.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-9.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-8.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-7.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-6.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-5.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-4.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-3.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-2.png><li data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-1.png><li class='hc-end' data-img-src=static/assets/images/dia-hat-1000/dia-hat-1000-23.png>";
+                var name = $(this).data('card');
+                // var imgNum = new Array(23);//create a 45 element array
 
-                $('#' + turntableId + ' ul').append(test);
+                for(var iNum=23; iNum>1; iNum--){
+                  $('#' + turntableId + ' ul').append('<li class="hc-end" data-img-src="static/assets/images/' + name + '/' + name + '-' + (iNum - 1) + '.jpg">');
+                }
+                $('#' + turntableId + ' ul').append('<li class="hc-end" data-img-src="static/assets/images/' + name + '/' + name + '-' + 23 + '.jpg">');
+
                 $('#' + turntableId).turntable();
             }
-
-            // $('#' + turntableId).turntable();
-            // $(this).children(":first").animate({'opacity':'1'},500);
-
-            // $(this).animate({'opacity':'1'},3000);
-
         }
 
     });

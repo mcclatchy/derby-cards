@@ -1,4 +1,3 @@
-@import "base.scss";
 //  _____                 _                                 _             _
 // / ____|               | |                               | |           | |
 // | |       _   _   ___  | |_    ___    _ __ ___      ___  | |_   _   _  | |   ___   ___
@@ -8,11 +7,14 @@
 //                                                                 __/ |
 //                                                                |___/
 
+$dark: #094d73;
+
+
 body {
 	background: rgba(0, 0, 0, 0.05);
 }
 
-.hc-card, .hc-card1 {
+.hc-card, #hc-first-card {
 	width: 90%;
 	max-width: 1000px;
 	margin: 2rem auto;
@@ -22,7 +24,7 @@ body {
 	// border: 4px solid #222;
 	-webkit-box-shadow: 0px 0px 14px -5px rgba(0,0,0,0.3);
 	-moz-box-shadow: 0px 0px 14px -5px rgba(0,0,0,0.3);
-	box-shadow: 0px 0px 14px -5px rgba(0,0,0,0.3);
+	box-shadow: 0px 1px 14px -4px rgba(0,0,0,0.3);
 	height: auto;
 	background: white;
 
@@ -30,39 +32,6 @@ body {
 		// width: 80%;
 		max-width: 900px;
 	}
-}
-
-#nav {
-	position: relative;
-	top: 50%;
-	transform: translateY(-50%);
-	font-size: 5vw;
-	cursor: pointer;
-
-	#left,
-	#right {
-		color: white;
-		pointer-events: auto;
-		opacity: 0.85;
-		text-shadow: 1px 1px 1px solid #000;
-
-		&:hover {
-			color: white;
-			opacity: 1;
-			-webkit-animation: heartbeat 1.5s ease-in-out infinite both;
-			-moz-animation: heartbeat 1.5s ease-in-out infinite both;
-			animation: heartbeat 1.5s ease-in-out infinite both;
-		}
-	}
-
-	#right {
-		float: right;
-	}
-}
-
-.inactive {
-	opacity: 0.2 !important;
-	cursor: auto;
 }
 
 .turntable {
@@ -83,6 +52,7 @@ body {
 
 			img {
 				width: 100%;
+			    margin-bottom: -0.3rem;
 			}
 		}
 	}
@@ -90,4 +60,140 @@ body {
 
 .turntable ul li.active {
 	display: block;
+}
+
+/*******************************************************************************
+AUDIO PLAYER
+*******************************************************************************/
+
+/* Top Info */
+
+#title {
+    position: absolute;
+    width: 90%;
+    display: block;
+    margin: 0 auto;
+    top: 5%;
+    line-height: 34px;
+    height: 34px;
+    left: 0;
+    right: 0;
+    text-align: left;
+    font-size: 3rem;
+    opacity: 0.9;
+    font-weight: 300;
+    color: $dark;
+
+	@media (max-width: 768px) {
+		font-size: 2rem;
+	}
+}
+
+#toolbar {
+    position: absolute;
+    width: 100%;
+    /*height: 70px;*/
+    bottom: 0.5%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+	// background: rgba(black, 0.3);
+}
+
+/* Controls */
+
+.controlsOuter {
+    position: relative;
+    width: 90%;
+	margin: 0 auto;
+    height: 55px;
+	display: block;
+}
+
+.btn {
+    position: absolute;
+    cursor: pointer;
+    opacity: 0.9;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.btn:hover {
+    opacity: 1;
+}
+
+#play-pause {
+    display: inline-block;
+    float: left;
+    height: 100%;
+	width: 3.4rem;
+	margin-right: 1rem;
+}
+
+.fa-play, .fa-pause {
+	font-size: 2rem !important;
+	color: $dark;
+}
+
+#playBtn {
+    position: relative;
+    width: 34px;
+    height: 35px;
+    float: left;
+    top: 50%;
+    background-size: contain;
+    margin: -17.5px auto;
+}
+
+#pauseBtn {
+    position: relative;
+    width: 34px;
+    height: 35px;
+    float: left;
+    top: 50%;
+    background-size: contain;
+    margin: -17.5px auto;
+    display: none;
+}
+
+#time-wrapper {
+	position: relative;
+    height: auto;
+    width: auto;
+    float: right;
+    top: 50%;
+    font-size: 1.3rem;
+    font-weight: 300;
+    margin: -13.5px 0;
+    display: inline-block;
+    color: $dark;
+	text-align: right;
+}
+
+#timer, #divider, #duration {
+    display: inline-block;
+}
+
+/* Progress */
+
+#scrubber {
+    position: relative;
+    height: 5px;
+    float: left;
+	top: 50%;
+	margin: -3px;
+    display: inline-block;
+    width: calc(100% - (3.4rem + 9.2rem));
+    cursor: pointer;
+	background: rgba(black, 0.2);
+}
+
+#progress {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 5px;
+    background-color: $dark;
+    z-index: 5000;
 }
