@@ -61,9 +61,31 @@
     }
 
     //loads images one at a time on page load
+
     (function appendImages(callback) {
       $listItems.each(function () {
-        $(this).html('<img src="' + $(this).data("imgSrc") + '">');
+
+        var rmSlash = $(this).data('imgSrc').split('/');
+        var srcset = rmSlash[0] + '/' + rmSlash[1] + '/' + rmSlash[2] + '/resized/' + rmSlash[3] + '/' + rmSlash[4];
+        var rmPeriod = srcset.split('.');
+
+        var src1500 = $(this).data('imgSrc') + ' 1500w, ';
+        var src600 = rmPeriod[0] + '-600.jpg 600w';
+
+        $(this).html('<img src="' + $(this).data("imgSrc") + '" srcset="' + src1500 + src600 + '">');
+
+        // var resizeTimer;
+        //
+        // $(window).on('resize', function(e) {
+        //     clearTimeout(resizeTimer);
+        //     resizeTimer = setTimeout(function() {
+        //       $('img').remove();
+        //
+        //       $listItems.each(function() {
+        //         $(this).html('<img src="' + $(this).data("imgSrc") + '" srcset="' + src1500 + src600 + '">');
+        //       });
+        //     }, 250);
+        // });
       });
     })();
 

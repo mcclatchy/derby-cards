@@ -18,6 +18,10 @@
    var bar = $(this).find('.bar');
    var scrubber = $(this).find('.scrubber');
    var duration = $(this).find('.duration');
+   var subtitles = $(this).find('.subtitles');
+
+   var name = $(this).data('card');
+
 
    /**
     * Player class containing the state of our playlist and where we are in it.
@@ -42,7 +46,6 @@
 
        index = typeof index === 'number' ? index : self.index;
        var data = self.playlist[index];
-       console.log(data);
 
        // If we already loaded this track, use the current one.
        // Otherwise, setup and load a new Howl.
@@ -86,7 +89,7 @@
        sound.play();
 
        // Update the track display.
-       $(track).html(data.title);
+      //  $(track).html(data.title);
       //  track.innerHTML =  data.title;
 
        // Show the pause button.
@@ -121,71 +124,6 @@
      },
 
      /**
-      * Skip to the next or previous track.
-      * @param  {String} direction 'next' or 'prev'.
-      */
-     skip: function(direction) {
-       var self = this;
-
-       // Get the next track based on the direction of the track.
-       var index = 0;
-       if (direction === 'prev') {
-         index = self.index - 1;
-         if (index < 0) {
-           index = self.playlist.length - 1;
-         }
-       } else {
-         index = self.index + 1;
-         if (index >= self.playlist.length) {
-           index = 0;
-         }
-       }
-
-       self.skipTo(index);
-     },
-
-     /**
-      * Skip to a specific track based on its playlist index.
-      * @param  {Number} index Index in the playlist.
-      */
-     skipTo: function(index) {
-       var self = this;
-
-       // Stop the current track.
-       if (self.playlist[self.index].howl) {
-         self.playlist[self.index].howl.stop();
-       }
-
-       // Reset progress.
-       $(progress).css('width, 0%');
-
-       // Play the new track.
-       self.play(index);
-     },
-
-     /**
-      * Set the volume and update the volume slider display.
-      * @param  {Number} val Volume between 0 and 1.
-      */
-     volume: function(val) {
-       var self = this;
-
-       // Update the global volume (affecting all Howls).
-       Howler.volume(val);
-
-       // Update the display on the slider.
-       var barWidth = (val * 90) / 100;
-       barFull.style.width = (barWidth * 100) + '%';
-       var test2 = (volume.clientWidth * barWidth + 25) + 'px';
-       sliderBtn.style.left = test2;
-     },
-
-     /**
-      * Set the volume and update the volume slider display.
-      * @param  {Number} val Volume between 0 and 1.
-      */
-
-     /**
       * Seek to a new position in the currently playing track.
       * @param  {Number} per Percentage through the song to skip.
       */
@@ -199,6 +137,8 @@
        if (sound.playing()) {
          sound.seek(sound.duration() * per);
        }
+
+
      },
 
      /**
@@ -212,31 +152,28 @@
 
        // Determine our current seek position.
        var seek = sound.seek() || 0;
+
        $(timer).html(self.formatTime(Math.round(seek)));
+
+       var json = 'static/assets/subtitles/' + name + '.json';
+
+       $.getJSON(json, function(transcript) {
+          for (var i = 0; i < transcript.length; i++) {
+               if (transcript[i]['startTime'] < seek && transcript[i]['endTime'] > seek ) {
+                $(subtitles).html(transcript[i]['text']);
+               }
+          }
+      });
+
        var progressWidth = (((seek / sound.duration()) * 100) || 0) + '%';
        $(progress).css({
           width: progressWidth
        });
 
-       // console.log(progress.style.width);
-
        // If the sound is still playing, continue stepping.
        if (sound.playing()) {
          requestAnimationFrame(self.step.bind(self));
        }
-     },
-
-     /**
-      * Toggle the playlist display on/off.
-      */
-     togglePlaylist: function() {
-       var self = this;
-       var display = (playlist.style.display === 'block') ? 'none' : 'block';
-
-       setTimeout(function() {
-         playlist.style.display = display;
-       }, (display === 'block') ? 0 : 500);
-       playlist.className = (display === 'block') ? 'fadein' : 'fadeout';
      },
 
      /**
@@ -272,6 +209,14 @@
      },
      {
          "audio": "dianet",
+         "howl": null
+     },
+     {
+         "audio": "kristen",
+         "howl": null
+     },
+     {
+         "audio": "mary",
          "howl": null
      }
    ]);

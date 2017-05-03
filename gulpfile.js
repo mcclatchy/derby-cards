@@ -33,7 +33,7 @@ gulp.task('image-resize', function() {
         .pipe(rename(function(path) {
             path.basename += "-600";
         }))
-        .pipe(gulp.dest('build/static/assets/images/resize-test'));
+        .pipe(gulp.dest('build/static/assets/images/resized'));
 });
 
 // reloads browser on file save

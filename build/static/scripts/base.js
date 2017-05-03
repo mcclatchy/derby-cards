@@ -7,12 +7,10 @@ var loopLength;
 Gets model playlist
 ***************************************************************************/
 
-$(document).ready(function() {
-    $('#dia-turntable').turntable();
-    $('#nicole-turntable').turntable();
-    $('#clark-turntable').turntable();
-    $('#scott-turntable').turntable();
-});
+$('#dia-turntable').turntable();
+$('#nicole-turntable').turntable();
+$('#clark-turntable').turntable();
+$('#scott-turntable').turntable();
 
 /* Every time the window is scrolled ... */
 $(window).scroll( function(){
@@ -40,7 +38,24 @@ $(window).scroll( function(){
                 $('#' + turntableId).turntable();
             }
         }
-
     });
+});
 
+$('.subtitles-btn').click(function() {
+    if ($(this).hasClass('subtitles-off')) {
+        $(this).removeClass('subtitles-off');
+        $(this).addClass('subtitles-on');
+
+        $('.playBtn').click(function() {
+            if ($('.subtitles-btn').hasClass('subtitles-on')) {
+                $('.subtitles').show();
+            } else {
+                $('.subtitles').hide();
+            }
+        });
+    } else {
+        $(this).removeClass('subtitles-on');
+        $(this).addClass('subtitles-off');
+        $('.subtitles').hide();
+    }
 });
